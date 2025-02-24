@@ -8,7 +8,7 @@ pipeline {
         //retry(1)
     }
     parameters{
-        choice(name: 'ENVIRONMENT', choices: ['dev', 'qa', 'uat', 'pre-prod', 'prod'], description: 'Select your Environment')
+        choice(name: 'environment', choices: ['dev', 'qa', 'uat', 'pre-prod', 'prod'], description: 'Select your Environment')
         string(name: 'version',  description: 'Enter your application version')
         string(name: 'jira-id',  description: 'Enter your jira id')
     }
@@ -26,7 +26,7 @@ pipeline {
         stage('Setup Environment'){
             steps{
                 script{
-                    environment = params.ENVIRONMENT
+                    environment = params.environment
                     appVersion = params.version
                     account_id = pipelineGlobals.getAccountID(environment)
                 }
